@@ -1,34 +1,37 @@
 import './App.css';
+import { User } from './User';
+import { Planet } from './Planets';
 
 function App() {
-  return (
-    <div className="App">
-      <User name="Sirajuddin" age={26} email="sirajuddin@gmail.com" />
-      <Job role="CEO" company="Siraj & Co." salary={200000} />
-      <User name="Shaik" age={25} email="shaik@gmail.com" />
-      <Job role="SDE-2" company="Siraj & Co." salary={120000} />
-      <User name="Siraj" age={24} email="siraj@gmail.com" />
-      <Job role="SDE-1" company="Siraj & Co." salary={90000} />
-    </div>
-  );
-}
 
-const User = (props) => {
-  return (
-    <div>
-      <h1>{props.name}</h1>
-      <h2>{props.age}</h2>
-      <h3>{props.email}</h3>
-    </div>
-  );
-}
+  // CSS, Ternary Operator
+  // let isTextColorful = true;
+  // let isButtonPresent = false;
 
-const Job = (props) => {
+  // return (
+  //   <div className='App'>
+  //     <h1 style={{ color: isTextColorful ? "green" : "red" }}>This text is colorful</h1>
+  //     {isButtonPresent && <button>This is a button</button>}
+  //   </div >
+  // );
+
+  // Lists
+  const planets = [
+    { name: "Mars", isGasPlanet: false },
+    { name: "Earth", isGasPlanet: false },
+    { name: "Jupiter", isGasPlanet: true },
+    { name: "Venus", isGasPlanet: false },
+    { name: "Neptune", isGasPlanet: true },
+    { name: "Uranus", isGasPlanet: true }
+  ];
+
   return (
-    <div>
-      <h2>{props.company}</h2>
-      <h3>{props.role}</h3>
-      <h4>{props.salary}</h4>
+    <div className='App'>
+      {
+        planets.map((planet, key) =>
+          planet.isGasPlanet && <Planet name={planet.name} />
+        )
+      }
     </div>
   )
 }
