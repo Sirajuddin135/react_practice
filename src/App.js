@@ -1,6 +1,7 @@
 import './App.css';
-import { User } from './User';
-import { Planet } from './Planets';
+// import { User } from './User';
+// import { Planet } from './Planets';
+import { useState } from 'react';
 
 function App() {
 
@@ -15,24 +16,30 @@ function App() {
   //   </div >
   // );
 
-  // Lists
-  const planets = [
-    { name: "Mars", isGasPlanet: false },
-    { name: "Earth", isGasPlanet: false },
-    { name: "Jupiter", isGasPlanet: true },
-    { name: "Venus", isGasPlanet: false },
-    { name: "Neptune", isGasPlanet: true },
-    { name: "Uranus", isGasPlanet: true }
-  ];
+  const [count, setCount] = useState(0);
+
+  const increaseCount = () => {
+    setCount(count + 1);
+  }
+
+  const decreaseCount = () => {
+    setCount(count - 1);
+  }
 
   return (
     <div className='App'>
-      {
-        planets.map((planet, key) =>
-          planet.isGasPlanet && <Planet name={planet.name} />
-        )
-      }
-    </div>
+      <button onClick={increaseCount}>Increase Count</button>
+
+      <button onClick={decreaseCount}>Decrease Count</button>
+
+      <button onClick={() => {
+        setCount(0);
+      }}>
+        Set Count to Zero
+      </button>
+
+      {count}
+    </div >
   )
 }
 
