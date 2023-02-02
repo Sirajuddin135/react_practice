@@ -16,29 +16,44 @@ function App() {
   //   </div >
   // );
 
-  const [count, setCount] = useState(0);
+  const [todoList, setTodoList] = useState([]);
+  const [newTask, setNewTask] = useState("");
 
-  const increaseCount = () => {
-    setCount(count + 1);
+  const getTask = (event) => {
+    setNewTask(event.target.value);
   }
 
-  const decreaseCount = () => {
-    setCount(count - 1);
+  const addNewTask = () => {
+    const task = {
+      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      taskName: newTask
+    }
+
+    setTodoList([...todoList, task]);
+  }
+
+  const deleteTask = (id) => {
+    const newTodoList = todoList.filter(task => task.id !== id);
+    setTodoList(newTodoList);
   }
 
   return (
     <div className='App'>
-      <button onClick={increaseCount}>Increase Count</button>
-
-      <button onClick={decreaseCount}>Decrease Count</button>
-
-      <button onClick={() => {
-        setCount(0);
-      }}>
-        Set Count to Zero
-      </button>
-
-      {count}
+      <div className="addTask">
+        <input onChange={getTask} />
+        <button onClick={addNewTask}>Add Task</button>
+      </div>
+      <div className="list">
+        {todoList.map((task) => {
+          return (
+            <div>
+              <h3>{task.taskName}</h3>
+              <button onClick={() => deleteTask(task.id)}>X</button>
+            </div>
+          )
+        }
+        )}
+      </div>
     </div >
   )
 }
