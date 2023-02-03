@@ -1,7 +1,8 @@
 import './App.css';
+import { useState } from 'react';
 // import { User } from './User';
 // import { Planet } from './Planets';
-import { useState } from 'react';
+import { Task } from './Task';
 
 function App() {
 
@@ -26,7 +27,8 @@ function App() {
   const addNewTask = () => {
     const task = {
       id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
-      taskName: newTask
+      taskName: newTask,
+      completed: false
     }
 
     setTodoList([...todoList, task]);
@@ -39,17 +41,18 @@ function App() {
 
   return (
     <div className='App'>
-      <div className="addTask">
+      <div className='addTask'>
         <input onChange={getTask} />
         <button onClick={addNewTask}>Add Task</button>
       </div>
-      <div className="list">
+      <div className='list'>
         {todoList.map((task) => {
           return (
-            <div>
-              <h3>{task.taskName}</h3>
-              <button onClick={() => deleteTask(task.id)}>X</button>
-            </div>
+            <Task
+              taskName={task.taskName}
+              id={task.id}
+              deleteTask={deleteTask}
+            />
           )
         }
         )}
