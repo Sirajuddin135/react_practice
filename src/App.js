@@ -39,6 +39,16 @@ function App() {
     setTodoList(newTodoList);
   }
 
+  const completeTask = (id) => {
+    setTodoList(todoList.map((task) => {
+      if (task.id === id) {
+        return { ...task, completed: true };
+      }
+
+      return task;
+    }))
+  }
+
   return (
     <div className='App'>
       <div className='addTask'>
@@ -51,7 +61,9 @@ function App() {
             <Task
               taskName={task.taskName}
               id={task.id}
+              completed={task.completed}
               deleteTask={deleteTask}
+              completeTask={completeTask}
             />
           )
         }
