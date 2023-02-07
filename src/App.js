@@ -1,8 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-// import { User } from './User';
-// import { Planet } from './Planets';
-import { Task } from './Task';
+import { Text } from './Text';
 
 function App() {
 
@@ -17,8 +15,19 @@ function App() {
   //   </div >
   // );
 
+  const [showText, setShowText] = useState(false);
+
   return (
     <div className='App'>
+      <button
+        onClick={() =>
+          setShowText(!showText)
+        }
+      >
+        Show Text
+      </button>
+
+      {showText && <Text />}
     </div >
   )
 }
